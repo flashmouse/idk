@@ -1,7 +1,11 @@
 package com.lxy.tools.asm;
 
-public class Account { 
-	 public void operation() { 
-		 System.out.println("operation...");
-	 } 
-} 
+public class Account {
+	public void operation() {
+		System.out.println("operation...");
+	}
+
+	public Account() {
+
+	}
+}
