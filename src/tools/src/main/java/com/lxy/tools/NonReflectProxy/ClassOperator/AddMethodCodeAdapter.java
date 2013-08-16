@@ -4,9 +4,6 @@ import org.objectweb.asm.MethodAdapter;
 import org.objectweb.asm.MethodVisitor;
 
 import com.lxy.tools.NonReflectProxy.commons.MethodDefine;
-import com.lxy.tools.NonReflectProxy.newCode.ICode;
-import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
-import com.sun.xml.internal.ws.org.objectweb.asm.Type;
 
 public class AddMethodCodeAdapter extends MethodAdapter {
 
@@ -25,7 +22,7 @@ public class AddMethodCodeAdapter extends MethodAdapter {
 
 	@Override
 	public void visitCode(){
-		visitFieldInsn(Opcodes.GETFIELD, className, Type.getType(ICode.class), "()V");
+//		visitFieldInsn(Opcodes.GETFIELD, className, Type.getType(ICode.class), "()V");
 //		visitVarInsn(Opcodes.ALOAD, var);
 //		visitMethodInsn(md.getOpcode(), className,Type.getType(ICode.class), md.getDesc());
 	}

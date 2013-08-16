@@ -1,4 +1,4 @@
-package com.lxy.tools.NonReflectProxy.ClassOperator;
+package com.lxy.tools.NonReflectProxyTest;
 
 import java.util.List;
 
@@ -13,16 +13,16 @@ import com.lxy.tools.NonReflectProxy.newCode.ICode;
 import com.lxy.tools.NonReflectProxyTest.MyValue;
 import com.lxy.tools.commons.Pair;
 
-public class FindMethodClassAdapter extends ClassAdapter {
+public class TestMethodAdapter extends ClassAdapter {
 
 	private String className;
 	private List<Pair<MethodDefine, ICode<?>>> methods;
 
-	public FindMethodClassAdapter(ClassVisitor cv) {
+	public TestMethodAdapter(ClassVisitor cv) {
 		super(cv);
 	}
 
-	public FindMethodClassAdapter(ClassVisitor cv,
+	public TestMethodAdapter(ClassVisitor cv,
 			List<Pair<MethodDefine, ICode<?>>> methods) {
 		super(cv);
 		this.methods = methods;
