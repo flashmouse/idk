@@ -6,7 +6,6 @@ public class MyValue {
 
 	@Override
 	public String toString(){
-		System.out.println("MyValue:"+(value==null?"null":value));
 		return "MyValue:"+(value==null?"null":value);
 	}
 }
