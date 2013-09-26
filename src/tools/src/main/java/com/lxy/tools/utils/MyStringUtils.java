@@ -1,4 +1,4 @@
-package com.lxy.tools.commons;
+package com.lxy.tools.utils;
 
 public class MyStringUtils {
 	public static boolean isEmpty(String str) {

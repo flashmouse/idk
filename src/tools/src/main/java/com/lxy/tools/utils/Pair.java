@@ -1,4 +1,4 @@
-package com.lxy.tools.commons;
+package com.lxy.tools.utils;
 
 public class Pair<A, B> {
 	private A first;

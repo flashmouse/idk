@@ -7,8 +7,8 @@ import org.objectweb.asm.ClassWriter;
 
 import com.lxy.tools.NonReflectProxy.commons.MethodDefine;
 import com.lxy.tools.NonReflectProxy.newCode.ICode;
-import com.lxy.tools.commons.MyStringUtils;
-import com.lxy.tools.commons.Pair;
+import com.lxy.tools.utils.MyStringUtils;
+import com.lxy.tools.utils.Pair;
 
 public class CodeListInitializer {
 	private String className;
