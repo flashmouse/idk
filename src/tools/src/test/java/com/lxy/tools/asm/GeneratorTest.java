@@ -9,7 +9,6 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
 public class GeneratorTest {
-	@Test
 	public void run() throws Exception {
 //		String path = GeneratorTest.class.getResource("").toString();
 //		path = path.substring(5);

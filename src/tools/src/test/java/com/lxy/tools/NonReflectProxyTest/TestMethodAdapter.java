@@ -11,7 +11,7 @@ import org.objectweb.asm.Type;
 import com.lxy.tools.NonReflectProxy.commons.MethodDefine;
 import com.lxy.tools.NonReflectProxy.newCode.ICode;
 import com.lxy.tools.NonReflectProxyTest.MyValue;
-import com.lxy.tools.commons.Pair;
+import com.lxy.tools.utils.Pair;
 
 public class TestMethodAdapter extends ClassAdapter {
 

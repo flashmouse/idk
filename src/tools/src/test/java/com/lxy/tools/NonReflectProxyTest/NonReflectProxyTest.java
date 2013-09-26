@@ -10,8 +10,6 @@ import org.objectweb.asm.ClassAdapter;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
-import com.lxy.tools.NonReflectProxy.ClassOperator.FindMethodClassAdapter;
-
 public class NonReflectProxyTest {
 
 	/**
@@ -25,7 +23,7 @@ public class NonReflectProxyTest {
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
 	 */
-	@Test
+	
 	public void test() throws IOException, InstantiationException, IllegalAccessException, SecurityException, NoSuchFieldException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
 		ClassReader cr = new ClassReader("com.lxy.tools.NonReflectProxyTest.Hello");
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
