@@ -22,7 +22,6 @@ public class StartWork {
 		return instance;
 	}
 	
-	@SuppressWarnings("rawtypes")
 	public void execute() throws Exception{
 		AnnotationFinder finder = new AnnotationFinder();
 		Map<Class<?>,List<MethodProxyDefine>> proxiedMthods = finder.init();

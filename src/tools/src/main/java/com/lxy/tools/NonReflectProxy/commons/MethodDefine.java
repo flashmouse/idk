@@ -3,7 +3,7 @@ package com.lxy.tools.NonReflectProxy.commons;
 public class MethodDefine {
 	private Class<?> clazz;
 	private String name;
-	private Object[] paras;
+	private Class<?>[] paras;
 	private int opcode;
 	private String desc;
 
@@ -11,10 +11,11 @@ public class MethodDefine {
 
 	}
 
-	public MethodDefine(Class<?> clazz , String name,  Object... paras) {
+	public MethodDefine(Class<?> clazz , String name,  Class<?>[]  paras,String desc) {
 		this.clazz=clazz;
 		this.name=name;
 		this.paras=paras;
+		this.desc=desc;
 	}
 
 	public String getName() {
@@ -25,16 +26,12 @@ public class MethodDefine {
 		this.name = name;
 	}
 
-	public Object[] getParas() {
+	public Class<?>[] getParas() {
 		return paras;
 	}
 
-	public void setParas(Object[] paras) {
+	public void setParas(Class<?>[] paras) {
 		this.paras = paras;
-	}
-
-	public int getOpcode() {
-		return opcode;
 	}
 
 	public void setOpcode(int opcode) {

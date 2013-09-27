@@ -17,6 +17,7 @@ import com.lxy.tools.NonReflectProxy.annotation.Proxied;
 import com.lxy.tools.NonReflectProxy.commons.MethodDefine;
 import com.lxy.tools.NonReflectProxy.commons.MethodProxyDefine;
 import com.lxy.tools.NonReflectProxy.newCode.ICode;
+import com.lxy.tools.utils.ASMUtils;
 import com.lxy.tools.utils.Pair;
 import com.lxy.tools.utils.packageUtil.PackageFilter;
 import com.lxy.tools.utils.packageUtil.PackageUtils;
@@ -64,9 +65,6 @@ public class AnnotationFinder {
 
 	private Map<Class<?>, List<MethodProxyDefine>> createNeedProxiedMethodsMetaData(
 			Set<Class<?>> classes) {
-		// Map<MethodDefine, Pair<Class<? extends ICode>, Class<? extends
-		// ICode>>> result = new HashMap<MethodDefine, Pair<Class<? extends
-		// ICode>, Class<? extends ICode>>>();
 		Map<Class<?>, List<MethodProxyDefine>> result = new HashMap<Class<?>, List<MethodProxyDefine>>();
 		for (Class<?> clazz : classes) {
 			result.put(clazz,createOneClassNeedProxiedMethodsMetaData(clazz));
@@ -88,14 +86,14 @@ public class AnnotationFinder {
 			if (methodProxied != null) {
 				lists.add(new MethodProxyDefine(
 						new MethodDefine(clazz, method.getName(), method
-								.getParameterTypes()),
+								.getParameterTypes(),ASMUtils.createDesc(method)),
 						new Pair<Class<? extends ICode>, Class<? extends ICode>>(
 								methodProxied.BeforeProxy(), methodProxied
 										.AfterProxy())));
 			} else if (classProxied != null) {
 				lists.add(new MethodProxyDefine(
 						new MethodDefine(clazz, method.getName(), method
-								.getParameterTypes()),
+								.getParameterTypes(),ASMUtils.createDesc(method)),
 						new Pair<Class<? extends ICode>, Class<? extends ICode>>(
 								classProxied.BeforeProxy(), classProxied
 										.AfterProxy())));
