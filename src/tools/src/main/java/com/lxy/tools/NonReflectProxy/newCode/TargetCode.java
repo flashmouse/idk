@@ -1,26 +1,31 @@
 package com.lxy.tools.NonReflectProxy.newCode;
 
-public class TargetCode<T> implements ICode<T> {
-	private ICode<?> next;
+public class TargetCode implements ICode {
+	private ICode next;
 
 	public TargetCode() {
 
 	}
 
-	public TargetCode(ICode<?> next) {
+	public TargetCode(ICode next) {
 		this.next = next;
 	}
 
-	public T addCode(Object... paras) throws Exception {
+	public Object addCode(Object... paras) throws Exception {
 		return null;
 	}
 
-	public boolean resultHook(T result) throws Exception {
+	public boolean resultHook(Object result) throws Exception {
 		return false;
 	}
 
-	public ICode<?> getNext() {
+	public ICode getNext() {
 		return next;
+	}
+
+	public void addCode() throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

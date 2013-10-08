@@ -64,4 +64,17 @@ public class PackageUtils {
 		
 		return null;
 	}
+	
+	/**
+	 * 把包括包名在内的字符串作为参数传入，仅返回一个class的名字
+	 */
+	public static String getClassNameWithOutPackage(String p){
+		p = p.replace("/", ".");
+		int place = p.lastIndexOf(".");
+		if(place <0){
+			return p;
+		}
+		
+		return p.substring(place+1);
+	}
 }

@@ -16,14 +16,14 @@ import com.lxy.tools.utils.Pair;
 public class TestMethodAdapter extends ClassAdapter {
 
 	private String className;
-	private List<Pair<MethodDefine, ICode<?>>> methods;
+	private List<Pair<MethodDefine, ICode>> methods;
 
 	public TestMethodAdapter(ClassVisitor cv) {
 		super(cv);
 	}
 
 	public TestMethodAdapter(ClassVisitor cv,
-			List<Pair<MethodDefine, ICode<?>>> methods) {
+			List<Pair<MethodDefine, ICode>> methods) {
 		super(cv);
 		this.methods = methods;
 	}
@@ -71,6 +71,9 @@ public class TestMethodAdapter extends ClassAdapter {
 
 	@Override
 	public void visitEnd() {
+	}
+
+	private void method1() {
 		//生成一个属性 name
 		cv.visitField(Opcodes.ACC_PUBLIC, "name",
 				Type.getDescriptor(String.class), null, null);

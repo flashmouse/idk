@@ -1,14 +1,17 @@
 package com.lxy.tools.NonReflectProxy.ClassOperator;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-
 import org.objectweb.asm.MethodAdapter;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
-import com.lxy.tools.NonReflectProxy.commons.MethodDefine;
 import com.lxy.tools.NonReflectProxy.commons.MethodProxyDefine;
-import com.lxy.tools.utils.MD5Util;
+import com.lxy.tools.NonReflectProxy.newCode.ICode;
+import com.lxy.tools.NonReflectProxy.newCode.NullCode;
+import com.lxy.tools.utils.ALLUtils;
+import com.lxy.tools.utils.ASMUtils;
+import com.lxy.tools.utils.MyStringUtils;
+import com.lxy.tools.utils.Pair;
 
 /**
  * 加入代码
@@ -21,40 +24,65 @@ public class AddMethodCodeAdapter extends MethodAdapter {
 
 	private String className;
 	private MethodProxyDefine mpd;
-
-	public AddMethodCodeAdapter(MethodVisitor mv) {
-		super(mv);
-	}
+	private Class<? extends ICode> beforeProxy;
+	private Class<? extends ICode> afterProxy;
 
 	public AddMethodCodeAdapter(MethodVisitor mv, MethodProxyDefine mpd,
 			String className) {
 		super(mv);
 		this.mpd = mpd;
+		this.className=className;
+		init();
 	}
-
-	@Override
-	public void visitEnd() {
-		generateCode(mpd);
-	}
-
-	private void generateCode(MethodProxyDefine mpd) {
-		MethodDefine md = mpd.getMethodDefine();
-		String attrName =getAttrName(mpd.getMethodDefine());
-		if(attrName == null){
+	
+	private void init(){
+		if(!MyStringUtils.isEmpty(className)){
+			className = className.replace(".", "/");
+		}
+		if(mpd == null){
 			return;
 		}
 		
+		Pair<Class<? extends ICode>, Class<? extends ICode>> proxies = mpd.getProxies();
+		Class<? extends ICode> proxy = proxies.getFirst();
+		if(proxy != null && !proxy.isAssignableFrom(NullCode.class) ){
+			beforeProxy = proxy;
+		}
+		proxy = proxies.getSecond();
+		if(proxy != null && !proxy.isAssignableFrom(NullCode.class) ){
+			afterProxy = proxy;
+		}
 	}
 
-	private String getAttrName(MethodDefine md) {
-		String methodName = md.getName();
-		String result = null;
-		try {
-			result = methodName +MD5Util.md5(md.getDesc());
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} 
-		return result;
+	@Override
+	public void visitCode(){
+		if(beforeProxy != null){
+			generateCode(beforeProxy);
+		}
+	}
+	
+	@Override
+	public void visitMethodInsn(int opcode, String owner, String name,
+			String desc) {
+		super.visitMethodInsn(opcode, owner, name, desc);
+		if(afterProxy != null){
+			generateCode(afterProxy);
+		}
+	}
+
+	private void generateCode(Class<? extends ICode> proxy ) {
+		if(proxy == null ){
+			return;
+		}
+		String proxyClazzName = proxy.getName().replace(".", "/");
+		String fieldName = ALLUtils.getFieldName(proxy);
+		mv.visitVarInsn(Opcodes.ALOAD,0 );
+		mv.visitFieldInsn(Opcodes.GETFIELD, className, fieldName, Type.getDescriptor(proxy));
+		mv.visitVarInsn(Opcodes.ASTORE, 1);
+		
+		mv.visitVarInsn(Opcodes.ALOAD,1 );
+		mv.visitInsn(Opcodes.ACONST_NULL);
+		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL,  proxyClazzName, "addCode", ASMUtils.createDesc( Object.class, Object[].class) );
 	}
 	
 	public MethodProxyDefine getMpd() {

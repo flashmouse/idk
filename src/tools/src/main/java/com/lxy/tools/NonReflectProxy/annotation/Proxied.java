@@ -15,8 +15,6 @@ import com.lxy.tools.NonReflectProxy.newCode.NullCode;
 @Target(value = { ElementType.METHOD,ElementType.TYPE })
 @Inherited
 public @interface Proxied {
-	@SuppressWarnings("rawtypes")
 	Class<? extends ICode> BeforeProxy() default NullCode.class;
-	@SuppressWarnings("rawtypes")
 	Class<? extends ICode> AfterProxy() default NullCode.class;
 }

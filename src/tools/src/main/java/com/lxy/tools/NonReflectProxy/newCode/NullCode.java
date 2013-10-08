@@ -1,17 +1,20 @@
 package com.lxy.tools.NonReflectProxy.newCode;
 
-public class NullCode<T> implements ICode<T>{
+public class NullCode implements ICode{
 
-	public T addCode(Object... paras) throws Exception {
+	public Object addCode(Object... paras) throws Exception {
 		return null;
 	}
 
-	public boolean resultHook(T result) throws Exception {
+	public boolean resultHook(Object result) throws Exception {
 		return false;
 	}
 
-	public ICode<?> getNext() {
+	public ICode getNext() {
 		return null;
+	}
+
+	public void addCode() throws Exception {
 	}
 
 }

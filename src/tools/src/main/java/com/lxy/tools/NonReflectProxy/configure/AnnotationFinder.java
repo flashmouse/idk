@@ -107,28 +107,4 @@ public class AnnotationFinder {
 			throws FileNotFoundException, JAXBException {
 		return createNeedProxiedMethodsMetaData(getNeedReflectedClasses());
 	}
-
-	// public static void main(String[] args) throws FileNotFoundException,
-	// JAXBException {
-	// AnnotationFinder finder = new AnnotationFinder();
-	// Map<MethodDefine, Pair<Class<? extends ICode>, Class<? extends ICode>>>
-	// values = finder
-	// .init();
-	// Iterator<Entry<MethodDefine, Pair<Class<? extends ICode>, Class<? extends
-	// ICode>>>> it = values
-	// .entrySet().iterator();
-	// Entry<MethodDefine, Pair<Class<? extends ICode>, Class<? extends ICode>>>
-	// entry = null;
-	// MethodDefine define = null;
-	// Pair<Class<? extends ICode>, Class<? extends ICode>> pair = null;
-	// while (it.hasNext()) {
-	// entry = it.next();
-	// define = entry.getKey();
-	// pair = entry.getValue();
-	// System.out.println("class:" + define.getClazz().getName()
-	// + "\nname:" + define.getName() + "\nbefore:"
-	// + pair.getFirst().getName() + "\nafter:"
-	// + pair.getSecond().getName()+"\n");
-	// }
-	// }
 }

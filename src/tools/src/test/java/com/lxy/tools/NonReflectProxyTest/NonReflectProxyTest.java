@@ -24,6 +24,7 @@ public class NonReflectProxyTest {
 	 * @throws IllegalArgumentException 
 	 */
 	
+	
 	public void test() throws IOException, InstantiationException, IllegalAccessException, SecurityException, NoSuchFieldException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
 		ClassReader cr = new ClassReader("com.lxy.tools.NonReflectProxyTest.Hello");
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
