@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +18,7 @@ import com.lxy.tools.NonReflectProxy.annotation.Proxied;
 import com.lxy.tools.NonReflectProxy.commons.MethodDefine;
 import com.lxy.tools.NonReflectProxy.commons.MethodProxyDefine;
 import com.lxy.tools.NonReflectProxy.newCode.ICode;
+import com.lxy.tools.utils.ALLUtils;
 import com.lxy.tools.utils.ASMUtils;
 import com.lxy.tools.utils.Pair;
 import com.lxy.tools.utils.packageUtil.PackageFilter;
@@ -26,12 +28,12 @@ import com.lxy.tools.utils.xmlUtils.JAXBUtils;
 public class AnnotationFinder {
 	public NonReflectProxyConfFile getConfFile() throws FileNotFoundException,
 			JAXBException {
-		return getConfFile("resources/nrp.xml");
+		return getConfFile("nrp.xml");
 	}
 
 	public NonReflectProxyConfFile getConfFile(String fileName)
 			throws FileNotFoundException, JAXBException {
-		File file = new File(fileName);
+		File file = new File(ALLUtils.getContextPath().getPath()+fileName);
 		if (!(file.exists() && file.isFile())) {
 			throw new FileNotFoundException(file.getAbsoluteFile()
 					.getAbsolutePath());
@@ -44,7 +46,7 @@ public class AnnotationFinder {
 
 	public Set<Class<?>> getNeedReflectedClasses()
 			throws FileNotFoundException, JAXBException {
-		return getNeedReflectedClasses("resources/nrp.xml");
+		return getNeedReflectedClasses("nrp.xml");
 	}
 
 	public Set<Class<?>> getNeedReflectedClasses(String xml)

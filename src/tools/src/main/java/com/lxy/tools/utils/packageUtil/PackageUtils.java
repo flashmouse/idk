@@ -5,15 +5,19 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lxy.tools.NonReflectProxy.configure.ProxiedAnnotationFilter;
+import com.lxy.tools.utils.ALLUtils;
 import com.lxy.tools.utils.FileUtils;
 import com.lxy.tools.utils.afterOperate.ClassFileAfterOperate;
 
 public class PackageUtils {
-	private static final String PRE_ = "target.classes.";
-	
 	public static List<Class<?>> getClassesWithoutLoad(String packageName,PackageFilter ... filter) throws FileNotFoundException{
-		String filePath = (PRE_+packageName).replace(".", File.separator);
+		String filePath = null;
+		if(packageName.charAt(0)=='/'){
+			filePath = packageName;
+		}else{
+			filePath = ALLUtils.getContextPath().getPath()+packageName.replace(".", File.separator);
+		}
+		System.out.println("path:"+filePath);
 		List<String> names = FileUtils.getClassesWholeName(filePath, null,new ClassFileAfterOperate(packageName));
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		for(String name:names){

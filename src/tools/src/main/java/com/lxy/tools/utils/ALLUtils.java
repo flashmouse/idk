@@ -1,5 +1,7 @@
 package com.lxy.tools.utils;
 
+import java.io.File;
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 
 import com.lxy.tools.NonReflectProxy.newCode.ICode;
@@ -18,5 +20,14 @@ public class ALLUtils {
 			e.printStackTrace();
 		} 
 		return result;
+	}
+	
+	/**
+	 * 获取当前ClassLoader所在的运行环境的绝对路径
+	 * @return
+	 */
+	public static URL getContextPath(){
+		ClassLoader cl = ALLUtils.class.getClassLoader();
+		return cl.getResource("");
 	}
 }
