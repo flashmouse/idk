@@ -43,7 +43,7 @@ public class AddProxy {
 	
 	private void init(){
 		classOps = new HashMap<Class<?>,Pair<ClassReader,ClassWriter>>();
-		clazzLoader = new ByteArrayClassLoader(AddProxy.class.getClassLoader());
+		clazzLoader = NonReflectProxyFactory.cl;
 	}
 
 	public void generateCode() throws Exception {
@@ -72,13 +72,6 @@ public class AddProxy {
 			l.close();
 			String proxyClassName = clazz.getName()+"$proxy";
 			Class<?> proxyClazz = clazzLoader.defineClassFromByteArray(proxyClassName, data);
-			Field[] fs = proxyClazz.getDeclaredFields();
-			Object value =  proxyClazz.newInstance();
-			Method[] methods = proxyClazz.getDeclaredMethods();
-			for(Method m:methods){
-				m.invoke(value, null);
-				System.out.println("-------------------");
-			}
 		}
 	}
 

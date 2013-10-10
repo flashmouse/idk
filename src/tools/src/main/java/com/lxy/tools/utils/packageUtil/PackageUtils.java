@@ -17,7 +17,6 @@ public class PackageUtils {
 		}else{
 			filePath = ALLUtils.getContextPath().getPath()+packageName.replace(".", File.separator);
 		}
-		System.out.println("path:"+filePath);
 		List<String> names = FileUtils.getClassesWholeName(filePath, null,new ClassFileAfterOperate(packageName));
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		for(String name:names){
