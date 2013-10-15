@@ -23,16 +23,17 @@ public class InitClassFieldsMethodAdapter extends MethodAdapter{
 	}
 	
 	@Override
-	public void visitMethodInsn(int opcode, String owner, String name,
-			String desc) {
-		Iterator<Entry<String, Class<? extends ICode>>> it = icodesFields.entrySet().iterator();
-		Entry<String,Class<? extends ICode>> entry =null;
-		while(it.hasNext()){
-			entry = it.next();
-			initFields(entry.getKey(), entry.getValue());
+	public void visitInsn(int opcode) {
+		if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)
+				|| opcode == Opcodes.ATHROW) {
+			Iterator<Entry<String, Class<? extends ICode>>> it = icodesFields.entrySet().iterator();
+			Entry<String,Class<? extends ICode>> entry =null;
+			while(it.hasNext()){
+				entry = it.next();
+				initFields(entry.getKey(), entry.getValue());
+			}
 		}
-		//TODO
-		visitInsn(Opcodes.RETURN); 
+		super.visitInsn(opcode);
 	}
 
 	private void initFields(String name, Class<? extends ICode> proxy) {

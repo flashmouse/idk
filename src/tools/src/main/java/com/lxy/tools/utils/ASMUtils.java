@@ -2,12 +2,13 @@ package com.lxy.tools.utils;
 
 import java.lang.reflect.Method;
 
+import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.sun.xml.internal.ws.org.objectweb.asm.Type;
 
-public class ASMUtils {
+public class ASMUtils implements Opcodes{
 	/**
 	 * 返回一个函数的 description
 	 * @param returnType 函数返回值
@@ -59,5 +60,21 @@ public class ASMUtils {
 		mv.visitVarInsn(Opcodes.ASTORE, 1);
 		
 		return true;
+	}
+	
+	/**
+	 * 生成一个类
+	 */
+	public static ClassWriter createClass(String className,String superClassName){
+		try{
+			ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+			cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, className, null, superClassName, null);
+			cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null,null).visitInsn(RETURN);
+			cw.visitEnd();
+			return cw;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

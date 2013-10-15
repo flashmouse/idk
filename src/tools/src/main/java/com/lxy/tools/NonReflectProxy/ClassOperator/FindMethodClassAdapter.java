@@ -28,7 +28,7 @@ import com.lxy.tools.utils.packageUtil.PackageUtils;
  */
 public class FindMethodClassAdapter extends ClassAdapter {
 
-	private String className;
+//	private String className;
 	private String enhancedName;
 	private List<MethodProxyDefine> mpds;
 	private Map<String, Class<? extends ICode>> icodesFields;
@@ -37,15 +37,14 @@ public class FindMethodClassAdapter extends ClassAdapter {
 			List<MethodProxyDefine> mpds, String className) {
 		super(cv);
 		this.mpds = mpds;
-		this.className = className;
+		this.enhancedName = className;
 		init();
 	}
 
 	private void init() {
-		if (!MyStringUtils.isEmpty(className)) {
-			className = className.replace(".", "/");
-			enhancedName = className+"$proxy";
-		}
+//		if (!MyStringUtils.isEmpty(className)) {
+//			className = className.replace(".", "/");
+//		}
 		icodesFields = new HashMap<String, Class<? extends ICode>>();
 
 		if (mpds != null && mpds.size() > 0) {
@@ -93,9 +92,6 @@ public class FindMethodClassAdapter extends ClassAdapter {
 
 		//TODO  delete old init function no code
 		if (name.equals("<init>")) {
-			mv= new ChangeToChildConstructorMethodAdapter(mv,
-					className.replace(".", "/"));
-			
 			return new InitClassFieldsMethodAdapter(mv, icodesFields,enhancedName);
 		}
 
@@ -112,12 +108,11 @@ public class FindMethodClassAdapter extends ClassAdapter {
 		return mv;
 	}
 
-	public void visit(final int version, final int access, final String name,
-			final String signature, final String superName,
-			final String[] interfaces) {
-		String enhancedSuperName = name; // 改变父类，
-		
-		super.visit(version, access, enhancedName, signature,
-				enhancedSuperName, interfaces);
-	}
+//	public void visit(final int version, final int access, final String name,
+//			final String signature, final String superName,
+//			final String[] interfaces) {
+////		String enhancedSuperName = name; // 改变父类，
+//		super.visit(version, access, enhancedName, signature,
+//				name, interfaces);
+//	}
 }

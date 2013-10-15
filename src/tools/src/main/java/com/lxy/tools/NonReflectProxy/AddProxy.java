@@ -2,8 +2,6 @@ package com.lxy.tools.NonReflectProxy;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -13,12 +11,12 @@ import java.util.Map.Entry;
 import org.objectweb.asm.ClassAdapter;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Type;
 
+import com.lxy.tools.NonReflectProxy.ClassOperator.CreateChildrenClassAdapter;
+import com.lxy.tools.NonReflectProxy.ClassOperator.ExecuteSuperClassMethodAdapter;
 import com.lxy.tools.NonReflectProxy.ClassOperator.FindMethodClassAdapter;
 import com.lxy.tools.NonReflectProxy.commons.MethodProxyDefine;
-import com.lxy.tools.NonReflectProxy.example.ExampleProxied;
-import com.lxy.tools.NonReflectProxy.newCode.ICode;
+import com.lxy.tools.utils.ASMUtils;
 import com.lxy.tools.utils.ByteArrayClassLoader;
 import com.lxy.tools.utils.Pair;
 
@@ -59,13 +57,18 @@ public class AddProxy {
 			entry = it.next();
 			clazz = entry.getKey();
 			mpd = entry.getValue();
-			
+			ClassWriter cw1 = ASMUtils.createClass(clazz.getName().replace(".", "/")+"$proxy", clazz.getName().replace(".", "/"));
+
+			ClassReader cr = new ClassReader(cw1.toByteArray());
 			ClassWriter cw =new ClassWriter(ClassWriter.COMPUTE_MAXS);
-			ClassReader cr = new ClassReader(clazz.getName());
-			ClassAdapter classAdapter = new FindMethodClassAdapter(cw, mpd,clazz.getName());
+			cr.accept(new CreateChildrenClassAdapter(cw, clazz.getName().replace(".", "/"),clazz.getName().replace(".", "/")+"$proxy"), ClassReader.EXPAND_FRAMES);
+			
+			cw1 = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+			ClassAdapter classAdapter = new FindMethodClassAdapter(cw1, mpd,clazz.getName().replace(".", "/")+"$proxy");
+			cr = new ClassReader(cw.toByteArray());
 			cr.accept(classAdapter, ClassReader.EXPAND_FRAMES);
 			
-			byte[] data = cw.toByteArray();
+			byte[] data = cw1.toByteArray();
 			File file = new File("D:\\workspace\\Test\\bin\\pack\\ExampleCode$proxy.class");
 			FileOutputStream l = new FileOutputStream(file);
 			l.write(data);
