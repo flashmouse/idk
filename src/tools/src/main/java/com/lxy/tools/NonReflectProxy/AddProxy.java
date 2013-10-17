@@ -54,19 +54,26 @@ public class AddProxy {
 		Class<?> clazz = null;
 		List<MethodProxyDefine> mpd = null;
 		while(it.hasNext()){
+			/*
+			 * 创建一个类 继承自原有类
+			 * 增加 构造函数 有代理的函数
+			 * 给函数写上一行代码 super.XX();
+			 * 添加代理对象到类中
+			 * 修改构造函数 把代理对象的初始化方法放进去
+			 */
 			entry = it.next();
 			clazz = entry.getKey();
 			mpd = entry.getValue();
 			ClassWriter cw1 = ASMUtils.createClass(clazz.getName().replace(".", "/")+"$proxy", clazz.getName().replace(".", "/"));
 
 			ClassReader cr = new ClassReader(cw1.toByteArray());
-			ClassWriter cw =new ClassWriter(ClassWriter.COMPUTE_MAXS);
-			cr.accept(new CreateChildrenClassAdapter(cw, clazz.getName().replace(".", "/"),clazz.getName().replace(".", "/")+"$proxy"), ClassReader.EXPAND_FRAMES);
+			ClassWriter cw =new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+			cr.accept(new CreateChildrenClassAdapter(cw,mpd ,clazz.getName().replace(".", "/"),clazz.getName().replace(".", "/")+"$proxy"), ClassReader.SKIP_DEBUG);
 			
-			cw1 = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+			cw1 = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 			ClassAdapter classAdapter = new FindMethodClassAdapter(cw1, mpd,clazz.getName().replace(".", "/")+"$proxy");
 			cr = new ClassReader(cw.toByteArray());
-			cr.accept(classAdapter, ClassReader.EXPAND_FRAMES);
+			cr.accept(classAdapter, ClassReader.SKIP_DEBUG);
 			
 			byte[] data = cw1.toByteArray();
 			File file = new File("D:\\workspace\\Test\\bin\\pack\\ExampleCode$proxy.class");

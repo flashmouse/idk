@@ -2,6 +2,7 @@ package com.lxy.tools.utils;
 
 import java.lang.reflect.Method;
 
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -69,12 +70,16 @@ public class ASMUtils implements Opcodes{
 		try{
 			ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 			cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, className, null, superClassName, null);
-			cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null,null).visitInsn(RETURN);
+//			cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null,null).visitInsn(RETURN);
 			cw.visitEnd();
 			return cw;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static void addMethod(ClassVisitor cv,Method ... methods){
+		
 	}
 }

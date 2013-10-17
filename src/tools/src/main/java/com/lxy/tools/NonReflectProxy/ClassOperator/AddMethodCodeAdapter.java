@@ -61,7 +61,7 @@ public class AddMethodCodeAdapter extends MethodAdapter {
 			generateCode(beforeProxy);
 		}
 	}
-
+	
 	@Override
 	public void visitInsn(int opcode) {
 		if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)
@@ -82,9 +82,9 @@ public class AddMethodCodeAdapter extends MethodAdapter {
 		mv.visitVarInsn(Opcodes.ALOAD, 0);
 		mv.visitFieldInsn(Opcodes.GETFIELD, className, fieldName,
 				Type.getDescriptor(proxy));
-		mv.visitVarInsn(Opcodes.ASTORE, 1);
-
-		mv.visitVarInsn(Opcodes.ALOAD, 1);
+//		mv.visitVarInsn(Opcodes.ASTORE, 1);
+//
+//		mv.visitVarInsn(Opcodes.ALOAD, 1);
 		mv.visitInsn(Opcodes.ACONST_NULL);
 		mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, proxyClazzName, "addCode",
 				ASMUtils.createDesc(Object.class, Object[].class));
