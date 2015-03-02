@@ -1,15 +1,7 @@
 package com.lxy.tools.asm;
 
-import java.io.File;
-import java.io.FileOutputStream;
-
-import org.junit.Test;
-import org.objectweb.asm.ClassAdapter;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-
 public class GeneratorTest {
-	public void run() throws Exception {
+    public void run() throws Exception {
 //		String path = GeneratorTest.class.getResource("").toString();
 //		path = path.substring(5);
 //
@@ -24,5 +16,5 @@ public class GeneratorTest {
 //		fout.close();
 //		Account account = new Account();
 //		account.operation();
-	}
+    }
 }

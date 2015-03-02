@@ -5,14 +5,14 @@ import com.lxy.tools.proxy.newCode.ExampleCode;
 
 public class RunCode {
 
-	private Integer value;
-	
-	public Integer getValue(){
-		return value;
-	}
+    private Integer value;
 
-	@Proxied(BeforeProxy=ExampleCode.class)
-	public void test(){
-		System.out.println("in runcode");
-	}
+    public Integer getValue() {
+        return value;
+    }
+
+    @Proxied(BeforeProxy = ExampleCode.class)
+    public void test() {
+        System.out.println("in runcode");
+    }
 }
