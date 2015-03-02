@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
-import com.lxy.tools.NonReflectProxy.configure.NonReflectProxyConfFile;
+import com.lxy.tools.proxy.configure.NonReflectProxyConfFile;
 import com.lxy.tools.utils.xmlUtils.JAXBUtils;
 
 public class Test {

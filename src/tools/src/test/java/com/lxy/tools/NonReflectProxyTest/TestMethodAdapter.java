@@ -8,9 +8,8 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-import com.lxy.tools.NonReflectProxy.commons.MethodDefine;
-import com.lxy.tools.NonReflectProxy.newCode.ICode;
-import com.lxy.tools.NonReflectProxyTest.MyValue;
+import com.lxy.tools.proxy.commons.MethodDefine;
+import com.lxy.tools.proxy.newCode.ICode;
 import com.lxy.tools.utils.Pair;
 
 public class TestMethodAdapter extends ClassAdapter {

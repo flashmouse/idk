@@ -1,10 +1,9 @@
 package com.lxy.tools.utils;
 
-import java.io.File;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 
-import com.lxy.tools.NonReflectProxy.newCode.ICode;
+import com.lxy.tools.proxy.newCode.ICode;
 
 
 public class ALLUtils {

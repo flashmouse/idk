@@ -1,7 +1,7 @@
 package com.lxy.tools.NonReflectProxyTest.Example;
 
-import com.lxy.tools.NonReflectProxy.annotation.Proxied;
-import com.lxy.tools.NonReflectProxy.newCode.ExampleCode;
+import com.lxy.tools.proxy.annotation.Proxied;
+import com.lxy.tools.proxy.newCode.ExampleCode;
 
 public class RunCode {
 
