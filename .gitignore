@@ -1,4 +1,5 @@
 **/.classpath
+**/.idea/
 src/tools/.classpath
 **/.project
 *.class
